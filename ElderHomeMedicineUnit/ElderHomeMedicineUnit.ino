@@ -2,15 +2,15 @@
 
 #include <ESP8266WiFi.h>
 #include <FirebaseESP8266.h>
- 
-#define FIREBASE_HOST "https://isharawap-test.firebaseio.com/"
-#define FIREBASE_AUTH "8brzKD1aEVij766s6BDBG1L569PEJGU223YLD9eE"
+
+
+#define FIREBASE_HOST "https://caregiver-face-detection.firebaseio.com/"  //    https://isharawap-test.firebaseio.com/
+#define FIREBASE_AUTH "3gEHztcJ1osS0WByAEYSteDthL0pbGrM49Zm1WpE"          // 8brzKD1aEVij766s6BDBG1L569PEJGU223YLD9eE
 #define WIFI_SSID "Fed Geek"
 #define WIFI_PASSWORD "11002299"
 
 //Define FirebaseESP8266 data object
 FirebaseData fbdo;
-
 FirebaseJson json;
 
 void printResult(FirebaseData &data);
@@ -18,7 +18,6 @@ String path = "/IOT";
 
 void setup()
 {
-
   Serial.begin(115200);
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -38,27 +37,16 @@ void setup()
 
   //Set the size of WiFi rx/tx buffers in the case where we want to work with large data.
   fbdo.setBSSLBufferSize(1024, 1024);
-
   //Set the size of HTTP response buffers in the case where we want to work with large data.
   fbdo.setResponseSize(1024);
-
   //Set database read timeout to 1 minute (max 15 minutes)
   Firebase.setReadTimeout(fbdo, 1000 * 60);
   //tiny, small, medium, large and unlimited.
   //Size and its write timeout e.g. tiny (1s), small (10s), medium (30s) and large (60s).
   Firebase.setwriteSizeLimit(fbdo, "tiny");
-
   //optional, set the decimal places for float and double data to be stored in database
   Firebase.setFloatDigits(2);
   Firebase.setDoubleDigits(6);
-
-  /*
-  This option allows get and delete functions (PUT and DELETE HTTP requests) works for device connected behind the
-  Firewall that allows only GET and POST requests.
-  
-  Firebase.enableClassicRequest(fbdo, true);
-  */
-
   
   Serial.println("Set default tablet values...");
 
@@ -68,13 +56,6 @@ void setup()
     if (Firebase.setDouble(fbdo, path + "/Tablet" + (i + 1), 1  )  )
     {
       Serial.println("PASSED");
-     // Serial.println("PATH: " + fbdo.dataPath());
-     // Serial.println("TYPE: " + fbdo.dataType());
-    //  Serial.println("ETag: " + fbdo.ETag());
-     // Serial.print("VALUE: ");
-    //  printResult(fbdo);
-      //Serial.println("------------------------------------");
-      //Serial.println();
     }
     else
     {
@@ -260,14 +241,31 @@ void printResult(FirebaseData &data)
 void loop()
 {
   double runData;
-   Firebase.getInt(fbdo, path + "/Run");  // get run value
-   runData = fbdo.doubleData();
-   Serial.println(runData);
+  Firebase.getInt(fbdo, path + "/Run");  // get run value
+  runData = fbdo.doubleData();
+  Serial.println(runData);
    //printResult(fbdo);
   if(runData==1.0)
   {
-    printTabletData();
+    //printTabletData();
     // do something
+    double tb1Data;
+    Firebase.getInt(fbdo, path + "/Tablet1");  // get run value
+    tb1Data = fbdo.doubleData();
+    Serial.println(tb1Data);
+
+    double tb2Data;
+    Firebase.getInt(fbdo, path + "/Tablet2");  // get run value
+    tb2Data = fbdo.doubleData();
+    Serial.println(tb2Data);
+
+    double tb3Data;
+    Firebase.getInt(fbdo, path + "/Tablet3");  // get run value
+    tb3Data = fbdo.doubleData();
+    Serial.println(tb3Data);
+
+
+
 
   Firebase.setDouble(fbdo, path + "/Run", 0  );  // set run value 0
   }
