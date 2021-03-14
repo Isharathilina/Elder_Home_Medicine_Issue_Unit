@@ -34,7 +34,7 @@ void runMoter3(int n)
 {
   for(int i=0; i<n; i++)
   {
-    digitalWrite(D4, HIGH);   // turn the LED on (HIGH is the voltage level)
+    digitalWrite(D4, HIGH);   
     delay(500);                     
     digitalWrite(D4, LOW);
     delay(500);                     

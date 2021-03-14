@@ -7,6 +7,25 @@ void setup() {
   lcd.begin(16, 2);
                       // Print a message to the LCD.
   lcd.print("hello, world!");
+ // lcd.noBlink();
+  delay(2000);
+  // Turn on the blinking cursor:
+ // lcd.blink();
+ // delay(3000);
+   
+  lcd.clear();
+  //lcd.setCursor(0, 0);
+
+  lcd.print("hi!");
+  for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
+    // scroll one position left:
+    lcd.scrollDisplayRight();
+    // wait a bit:
+    delay(300);
+  }
+    lcd.clear();
+
+ 
 }
 
 void loop() {
@@ -15,4 +34,7 @@ void loop() {
   lcd.setCursor(0, 1);
   // print the number of seconds since reset:
   lcd.print(millis() / 1000);
+
+  double a = 22.0;
+  lcd.print("My "+String(a));
 }
