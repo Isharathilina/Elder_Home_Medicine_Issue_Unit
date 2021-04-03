@@ -4,8 +4,8 @@
 #include <FirebaseESP8266.h>
 #include <LiquidCrystal.h>
 
-#define FIREBASE_HOST "https://caregiver-face-detection.firebaseio.com/"  //    https://isharawap-test.firebaseio.com/
-#define FIREBASE_AUTH "3gEHztcJ1osS0WByAEYSteDthL0pbGrM49Zm1WpE"          // 8brzKD1aEVij766s6BDBG1L569PEJGU223YLD9eE
+#define FIREBASE_HOST "https://caregiver-face-detection.firebaseio.com/"  // firebae host address
+#define FIREBASE_AUTH "3gEHztcJ1osS0WByAEYSteDthL0pbGrM49Zm1WpE"          // db secret key
 #define WIFI_SSID "Fed Geek"
 #define WIFI_PASSWORD "11002299"
 
